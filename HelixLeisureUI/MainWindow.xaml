@@ -1,0 +1,60 @@
+﻿<Window x:Class="HelixLeisureUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="500.473" Width="1210.526" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid Margin="0,0,2,16">
+        <TabControl>
+            <TabItem Header="Sales View" Height="22" VerticalAlignment="Bottom">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Total Sales Details:" FontWeight="Bold"></Label>
+                    <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" x:Name="grdSales" AutoGenerateColumns="False" ItemsSource="{Binding}" Grid.Row="1">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="grdSalesRow_DoubleClick"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="cID" Binding="{Binding id}" Header="ID" />
+                            <DataGridTextColumn x:Name="cDateOfSale" Binding="{Binding DateOfSale}" Header="Date Of Sale" />
+                            <DataGridTextColumn x:Name="cLocation" Binding="{Binding location_name}" Header="Location" />
+                            <DataGridTextColumn x:Name="cSalesPerson" Binding="{Binding sales_person_name}" Header="Sales Person" />
+                            <DataGridTextColumn x:Name="cTotalSaleAmount" Binding="{Binding total_sale_amount}" Header="Total Sale Amount" />
+                            <DataGridTextColumn x:Name="cCurrency" Binding="{Binding currency}" Header="Currency" />
+                            <DataGridTextColumn x:Name="cSalesInvoice" Binding="{Binding sale_invoice_number}" Header="Sale Invoice No." />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Sales Per Product Details:" Name="ProductSalesHeader" Visibility="Hidden" Grid.Row="2" FontWeight="Bold"></Label>
+                    <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" IsReadOnly="True" x:Name="grdProducts" AutoGenerateColumns="False" ItemsSource="{Binding}" Grid.Row="3">
+                        <DataGrid.Columns>                            
+                            <DataGridTextColumn x:Name="cProductName" Binding="{Binding name}" Header="Product" />
+                            <DataGridTextColumn x:Name="cQuantity" Binding="{Binding quantity}" Header="Quantity" />
+                            <DataGridTextColumn x:Name="cSaleAmount" Binding="{Binding sale_amount}" Header="Amount" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Add Sales">
+                <Grid Margin="0,0,0,-19">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                        <TextBox Name="txtSalesJSONInput" Width="500" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" />                    
+                        <Button Content="Add Sales JSON"
+                            HorizontalAlignment="Left"
+		                    
+		                Click="btnAdd_Click" Grid.Row="1" Margin="0,20,0,0"/>
+                    <Label Name="lblMessage" Width="auto" Margin="0,5,0,-36" Grid.Row="2" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
